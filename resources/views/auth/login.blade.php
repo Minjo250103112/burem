@@ -1,71 +1,95 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+<head>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+    <title>BUREM - Login</title>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-         <!-- Forgot Password (moved to here, right-aligned) -->
-         @if (Route::has('password.request'))
-                <div class="mt-2 text-right">
-                    <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:underline"
-                       href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('template/css/sb-admin-2.css') }}" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            {{-- <div class="col-lg-6 d-none d-lg-block"></div> --}}
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
+                                    </div>
+                                    <form class="" method="POST" action="{{ route('login') }}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp" name="email"
+                                                placeholder="Masukkan email Anda...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" name="password" placeholder="Masukkan kata sandi Anda...">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Ingat Saya</label>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">Masuk</button>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Lupa Kata Sandi?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Buat Akun!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            @endif
 
-            <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-        
-        <!-- Login Button (full width) -->
-        <div class="mt-4">
-            <x-primary-button class="w-full justify-center">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-        
-        <!-- Register Link (centered) -->
-        <div class="mt-4 text-center">
-            <span class="text-sm text-gray-600 dark:text-gray-400">
-                Belum punya akun?
-                <a href="{{ route('register') }}" class="text-indigo-600 hover:underline dark:text-indigo-400">
-                    Daftar di sini
-                </a>
-            </span>
-        </div>
-    </form>
-        </div>
-
-         <!-- Footer -->
-         <div class="w-full sm:max-w-md mt-4 px-6 py-3 text-center text-xs text-gray-500 dark:text-gray-400">
-                <p>&copy; {{ date('Y') }} SICUREM.ISMI AMELIA_UTD All rights reserved.</p>
-               
             </div>
-        
-        
-</x-guest-layout>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('template/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('template/js/sb-admin-2.min.js') }}"></script>
+
+</body>
+
+</html>
