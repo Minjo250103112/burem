@@ -6,7 +6,6 @@
         <aside class="w-64 bg-white dark:bg-gray-800 shadow-lg">
             <div class="p-6">
                 <div class="flex items-center space-x-2">
-                    <img src="{{ asset('path-ke-logo.png') }}" alt="Logo" class="h-10">
                     <span class="text-xl font-bold text-gray-800 dark:text-white">Dashboard</span>
                 </div>
             </div>

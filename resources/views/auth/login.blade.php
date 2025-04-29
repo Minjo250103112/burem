@@ -10,7 +10,27 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BUREM - Login</title>
+                <style>
+                html, body {
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                    position: relative;
+                }
+
+                .footer {
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    text-align: center;
+                    padding: 15px 0;
+                    color: white;
+                    font-size: 14px;
+                }
+            </style>
+
+
+    <title>SICUREM - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +60,7 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
                                     </div>
                                     <form class="" method="POST" action="{{ route('login') }}">
                                         @csrf
@@ -66,7 +86,7 @@
                                         <a class="small" href="forgot-password.html">Lupa Kata Sandi?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Buat Akun!</a>
+                                        <a class="small" href="{{ route('register') }}">Buat Akun!</a>
                                     </div>
                                 </div>
                             </div>
@@ -79,6 +99,12 @@
         </div>
 
     </div>
+
+    <!-- Footer -->
+        <div class="footer bg-primary text-white">
+            &copy; {{ date('Y') }} SICUREM | PT. Bumi Tekno Indonesia | ISMI A_UTD
+        </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('template/vendor/jquery/jquery.min.js') }}"></script>
