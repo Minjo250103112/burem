@@ -29,7 +29,28 @@ class UserSeeder extends Seeder
                 'nomor_telepon' => '',
                 'role' => 'user',
                 'password' => bcrypt('12345'),
-            ]
+            ],
+            [
+                'nama' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'nomor_telepon' => '',
+                'role' => 'admin',
+                'password' => bcrypt('12345'),
+            ],
+            [
+                'nama' => 'Pelanggan 1',
+                'email' => 'pelanggan1@gmail.com',
+                'nomor_telepon' => '',
+                'role' => 'cusomer',
+                'password' => bcrypt('12345'),
+            ],
+            [
+                'nama' => 'Pelanggan 2',
+                'email' => 'pelanggan2@gmail.com',
+                'nomor_telepon' => '',
+                'role' => 'cusomer',
+                'password' => bcrypt('12345'),
+            ],
         ]);
     }
 }
