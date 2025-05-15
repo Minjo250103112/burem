@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerTicketController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +30,29 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::prefix('ticket')->name('ticket.')->group(function () {
+    Route::get('/', [CustomerTicketController::class, 'index'])->name('index');
+    Route::post('/', [CustomerTicketController::class, 'store'])->name('store');
+    Route::get('/create', [CustomerTicketController::class, 'create'])->name('create');
+    Route::get('/detail/{id}', [CustomerTicketController::class, 'show'])->name('show');
+});
+
+Route::prefix('ticket-customer')->name('ticket-customer.')->group(function () {
+    Route::get('/', [TicketController::class, 'index'])->name('index');
+    Route::get('/create', [TicketController::class, 'create'])->name('create');
+    Route::get('/detail/{id}', [TicketController::class, 'show'])->name('show');
+});
+
+Route::prefix('customer')->name('customer.')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('index');
+    Route::get('/create', [CustomerController::class, 'create'])->name('create');
+    Route::get('/detail/{id}', [CustomerController::class, 'show'])->name('show');
+});
+
+Route::prefix('report')->name('report.')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('index');
 });
 
 

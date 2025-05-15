@@ -4,8 +4,8 @@
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+        <a class="nav-link" href="{{ route('dashboard') }}">
+            <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
     <hr class="sidebar-divider">
@@ -14,13 +14,13 @@
     </div>
     @if (Auth::user()->role == 'admin')
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('ticket-customer.index') }}">
+            <i class="fas fa-fw fa-flag"></i>
             <span>Keluhan / Laporan</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('customer.index') }}">
+            <i class="fas fa-fw fa-users"></i>
             <span>Pelanggan</span></a>
     </li>
     <li class="nav-item">
@@ -40,35 +40,35 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('report.index') }}">
+            <i class="fas fa-fw fa-file"></i>
             <span>Laporan</span></a>
     </li>
     @elseif (Auth::user()->role == 'user')
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('ticket-customer.index') }}">
+            <i class="fas fa-fw fa-flag"></i>
             <span>Keluhan / Laporan</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('customer.index') }}">
+            <i class="fas fa-fw fa-users"></i>
             <span>Pelanggan</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('report.index') }}">
+            <i class="fas fa-fw fa-file"></i>
             <span>Laporan</span></a>
     </li>
     @else
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ route('ticket.create') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Buat Laporan</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link" href="{{ route('ticket.index') }}">
+            <i class="fas fa-fw fa-history"></i>
             <span>Riwayat Laporan</span></a>
     </li>
     @endif
