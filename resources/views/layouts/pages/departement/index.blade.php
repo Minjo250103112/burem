@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title', 'Karyawan')
-@section('title-content', 'Data Karyawan')
+@section('title', 'Divisi')
+@section('title-content', 'Divisi')
 @push('styles')
     <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary">Data Karyawan</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Data Divisi</h6>
                 <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
             </div>
             <div class="card-body">
@@ -16,10 +16,9 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No. </th>
-                                <th>Nama</th>
-                                <th>Divisi</th>
-                                <th>Kontak</th>
+                                <th>No.</th>
+                                <th>Nama Divisi</th>
+                                <th>Deskripsi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -28,7 +27,6 @@
                                 <td>Tiger Nixon</td>
                                 <td>System Architect</td>
                                 <td>Edinburgh</td>
-                                <td>61</td>
                                 <td>61</td>
                             </tr>
                         </tbody>

@@ -3,9 +3,12 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerTicketController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +58,17 @@ Route::prefix('report')->name('report.')->group(function () {
     Route::get('/', [ReportController::class, 'index'])->name('index');
 });
 
+Route::prefix('departement')->name('departement.')->group(function () {
+    Route::get('/', [DepartementController::class, 'index'])->name('index');
+});
+
+Route::prefix('package')->name('package.')->group(function () {
+    Route::get('/', [PackageController::class, 'index'])->name('index');
+});
+
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('index');
+});
 
 
 require __DIR__.'/auth.php';

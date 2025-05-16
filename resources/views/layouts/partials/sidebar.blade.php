@@ -32,10 +32,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Pilihan Menu :</h6>
-                <a class="collapse-item" href="buttons.html">Divisi</a>
-                <a class="collapse-item" href="buttons.html">Paket Layanan</a>
-                <a class="collapse-item" href="cards.html">Manajemen User</a>
-                <a class="collapse-item" href="cards.html">Manajemen Admin</a>
+                <a class="collapse-item" href="{{ route('departement.index') }}">Divisi</a>
+                <a class="collapse-item" href="{{ route('package.index') }}">Paket Layanan</a>
+                <a class="collapse-item" href="{{ route('user.index') }}">Manajemen User</a>
             </div>
         </div>
     </li>
