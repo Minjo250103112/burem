@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class CustomerTicketController extends Controller
@@ -13,7 +14,9 @@ class CustomerTicketController extends Controller
 
     public function create()
     {
-        return view('layouts.pages.customers.create');
+        $departments = Department::all();
+
+        return view('layouts.pages.customers.create', compact(['departments']));
     }
 
     public function store(Request $request)

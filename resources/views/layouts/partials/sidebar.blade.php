@@ -12,7 +12,8 @@
     <div class="sidebar-heading">
         Interface
     </div>
-    @if (Auth::user()->role == 'admin')
+    @if (Auth::guard('web')->check() && Auth::guard('web')->user()->role == 'admin')
+    {{-- @if (Auth::user()->role == 'admin') --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ticket-customer.index') }}">
             <i class="fas fa-fw fa-flag"></i>
@@ -43,7 +44,8 @@
             <i class="fas fa-fw fa-file"></i>
             <span>Laporan</span></a>
     </li>
-    @elseif (Auth::user()->role == 'user')
+    @elseif (Auth::guard('web')->check() && Auth::guard('web')->user()->role == 'user')
+    {{-- @elseif (Auth::user()->role == 'user') --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ticket-customer.index') }}">
             <i class="fas fa-fw fa-flag"></i>
@@ -59,7 +61,7 @@
             <i class="fas fa-fw fa-file"></i>
             <span>Laporan</span></a>
     </li>
-    @else
+    @elseif (Auth::guard('customer')->check())
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ticket.create') }}">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -70,6 +72,10 @@
             <i class="fas fa-fw fa-history"></i>
             <span>Riwayat Laporan</span></a>
     </li>
+    @else
+    <script>
+        window.location.href = "{{ route('login') }}";
+    </script>
     @endif
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">

@@ -25,14 +25,25 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php($no = 1)
+                            @forelse ($customers as $customer)
                             <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>61</td>
-                                <td>61</td>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $customer->name }}</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>{{ $customer->email }}</td>
+                                <td>
+                                    <a href="" class="btn btn-primary"><i class="fas fa-fw fa-eye"></i></a>
+                                    <a href="" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
+                                    <a href="" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
+                                </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td rowspan="6">Data tidak ada.</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

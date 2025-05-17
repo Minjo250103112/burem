@@ -23,12 +23,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                            </tr>
+                            @php($no = 1)
+                            @forelse ($departments as $department)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $department->name }}</td>
+                                    <td>-</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary"><i class="fas fa-fw fa-eye"></i></a>
+                                        <a href="" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
+                                        <a href="" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <td rowspan="4">Data tidak ada.</td>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -37,7 +46,7 @@
     </div>
 @endsection
 @push('script')
-<script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('template/js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('template/js/demo/datatables-demo.js') }}"></script>
 @endpush
