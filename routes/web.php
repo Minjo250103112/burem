@@ -28,6 +28,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/adm', function () {
+    return view('auth.login-admin');
+});
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,7 +43,7 @@ Route::prefix('ticket')->name('ticket.')->group(function () {
     Route::get('/', [CustomerTicketController::class, 'index'])->name('index');
     Route::post('/', [CustomerTicketController::class, 'store'])->name('store');
     Route::get('/create', [CustomerTicketController::class, 'create'])->name('create');
-    Route::get('/detail/{id}', [CustomerTicketController::class, 'show'])->name('show');
+    Route::get('{code}', [CustomerTicketController::class, 'show'])->name('show');
 });
 
 Route::prefix('ticket-customer')->name('ticket-customer.')->group(function () {

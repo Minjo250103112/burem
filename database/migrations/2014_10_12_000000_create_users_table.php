@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('nomor_telepon')->nullable();
             $table->string('role')->default('user');
+            $table->integer('department_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

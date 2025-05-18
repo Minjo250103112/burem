@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tickets', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('packages', function (Blueprint $table) {
+            $table->id();
             $table->string('code');
-            $table->integer('customer_id');
-            $table->integer('department_id');
-            $table->integer('package_id');
-            $table->string('priority');
-            $table->string('subject');
-            $table->longText('content');
-            $table->string('file')->nullable();
+            $table->string('name');
+            $table->integer('price');
+            $table->text('description');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('packages');
     }
 };

@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DepatmentSeeder::class,
             CustomerSeeder::class,
+            CustomerPackageSeeder::class,
+            PackageSeeder::class,
         ]);
     }
 }

@@ -38,7 +38,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('web')->check() && Auth::guard('web')->user()->name || Auth::guard('customer')->check() && Auth::guard('customer')->user()->name }}</span>
 
             </a>
             <!-- Dropdown - User Information -->

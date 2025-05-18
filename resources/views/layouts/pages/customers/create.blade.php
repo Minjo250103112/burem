@@ -2,16 +2,25 @@
 @section('title', 'Buat Laporan')
 @section('title-content', 'Buat Laporan')
 @section('content')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Form Buat Laporan</h6>
         </div>
         <div class="card-body">
-            <form>
+            <form method="POST" action="{{ route('ticket.store') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputname">Nama</label>
-                        <input type="text" hidden name="id" value="{{ Auth::guard('customer')->user()->id }}" disabled>
+                        <input type="text" hidden name="customer_id" value="{{ Auth::guard('customer')->user()->id }}">
                         <input type="text" class="form-control" id="inputname" name="name" value="{{ Auth::guard('customer')->user()->name }}" disabled>
                     </div>
                     <div class="form-group col-md-6">
@@ -22,30 +31,33 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputdivisi">Divisi</label>
-                        <select class="form-control" name="departement">
+                        <select class="form-control" name="department_id">
                             <option value="" selected disabled>---Pilih Divisi---</option>
                             @forelse ($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->code }} | {{ $department->name }}</option>
                             @empty
-                                <option value="">Support</option>
+                                <option value=""></option>
                             @endforelse
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputemail">Layanan</label>
-                        <select class="form-control" name="package">
+                        <select class="form-control" name="package_id">
                             <option value="" selected disabled>---Pilih Layanan---</option>
-                            <option value="">Website 1 Tahun Profesional</option>
-                            <option value="">CBT 1 Tahun</option>
+                            @forelse ($packages as $package)
+                                <option value="{{ $package->id }}">{{ $package->package->code }} | {{ $package->package->name }}</option>
+                            @empty
+                                <option value=""></option>
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputemail">Prioritas</label>
                         <select class="form-control" name="priority">
                             <option value="" selected disabled>---Pilih Prioritas---</option>
-                            <option value="">Rendah</option>
-                            <option value="">Sedang</option>
-                            <option value="">Tinggi</option>
+                            <option value="1">Rendah</option>
+                            <option value="2">Sedang</option>
+                            <option value="3">Tinggi</option>
                         </select>
                     </div>
                 </div>

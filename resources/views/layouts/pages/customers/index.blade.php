@@ -16,19 +16,23 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Kode</th>
                                 <th>Divisi</th>
                                 <th>Subjek</th>
                                 <th>Status</th>
-                                <th>Terakhir Diperbarui</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
+                            @forelse ($tickets as $ticket)
+                            <tr onclick="window.location='{{ route('ticket.show', $ticket->code) }}'" style="cursor: pointer;">
+                                <td>{{ $ticket->code }}</td>
+                                <td>{{ $ticket->department->name }}</td>
+                                <td>{{ $ticket->subject }}</td>
+                                <td><span class="badge badge-{{ $ticket->status == 1 ? 'success' : 'secondary' }}">{{ $ticket->status == 1 ? 'Dibuka' : 'Ditutup' }}</span></td>
                             </tr>
+                            @empty
+
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

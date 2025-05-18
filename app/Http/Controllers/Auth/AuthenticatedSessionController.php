@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
 
         // return redirect()->intended(RouteServiceProvider::HOME);
         // Determine which guard to use based on request or route
-        $guard = $request->has('customer_login') ? 'customer' : 'web';
+        $guard = $request->input('guard') == 'web' ? 'web' : 'customer';
 
         // Authenticate with the selected guard
         if (!Auth::guard($guard)->attempt($request->only('email', 'password'), $request->filled('remember'))) {
