@@ -31,11 +31,11 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputemail">Prioritas</label>
-                        <input type="text" class="form-control {{ $badge }}" id="inputdepartment" name="priority" value="{{ $text }}" disabled >
+                        <input type="text" class="form-control {{ $badge }}" id="inputdepartment" name="priority" value="{{ $text }}" style="font-weight: bold; color: white;" disabled >
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputemail">Status</label>
-                        <input type="text" class="form-control {{ $badge_status }}" id="inputdepartment" name="status" value="{{ $status }}" disabled >
+                        <input type="text" class="form-control {{ $badge_status }}" id="inputdepartment" name="status" value="{{ $status }}" style="font-weight: bold; color: white;" disabled >
                     </div>
                 </div>
                 <div class="form-group">
