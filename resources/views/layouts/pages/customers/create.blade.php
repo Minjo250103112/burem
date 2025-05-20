@@ -31,7 +31,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputdivisi">Divisi</label>
-                        <select class="form-control" name="department_id">
+                        <select class="form-control" name="department_id" required>
                             <option value="" selected disabled>---Pilih Divisi---</option>
                             @forelse ($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->code }} | {{ $department->name }}</option>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputemail">Layanan</label>
-                        <select class="form-control" name="package_id">
+                        <select class="form-control" name="package_id" required>
                             <option value="" selected disabled>---Pilih Layanan---</option>
                             @forelse ($packages as $package)
                                 <option value="{{ $package->id }}">{{ $package->package->code }} | {{ $package->package->name }}</option>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputemail">Prioritas</label>
-                        <select class="form-control" name="priority">
+                        <select class="form-control" name="priority" required>
                             <option value="" selected disabled>---Pilih Prioritas---</option>
                             <option value="1">Rendah</option>
                             <option value="2">Sedang</option>
@@ -63,11 +63,11 @@
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Subjek</label>
-                    <input type="text" class="form-control" id="inputsubject" placeholder="Masukkkan Subjek.." name="subject">
+                    <input type="text" class="form-control" id="inputsubject" placeholder="Masukkkan Subjek.." name="subject" required>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Pesan</label>
-                    <textarea  class="form-control" id="content" rows="3" name="content"></textarea>
+                    <textarea  class="form-control" id="content" rows="3" name="content" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">File</label>

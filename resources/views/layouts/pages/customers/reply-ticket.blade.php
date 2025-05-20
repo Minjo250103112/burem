@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Pesan</label>
-                    <textarea  class="form-control" id="content" rows="5" name="message"></textarea>
+                    <textarea  class="form-control" id="content" rows="5" name="message" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">File</label>

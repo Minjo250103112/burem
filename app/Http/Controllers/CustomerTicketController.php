@@ -99,9 +99,9 @@ class CustomerTicketController extends Controller
 
     public function response(Request $request)
     {
-        if (Auth::guard('web')->check() && Auth::guard('web')->user()->role == 'user') {
-        $column = 'user_id';
-        $id = Auth::guard('web')->user()->id;
+        if (Auth::guard('web')->check()) {
+            $column = 'user_id';
+            $id = Auth::guard('web')->user()->id;
         } elseif (Auth::guard('customer')->check()) {
             $column = 'customer_id';
             $id = Auth::guard('customer')->user()->id;

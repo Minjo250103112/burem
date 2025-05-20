@@ -76,7 +76,7 @@
         </div>
     </div>
     @forelse ($ticket->responses as $response)
-        <div class="card mb-4  border-left-{{ empty($response->user) ? 'primary' : 'warning'}} shadow h-100 py-2">
+        <div class="card mb-4 border-left-{{ empty($response->user) ? 'primary' : 'warning'}} shadow h-100">
             <div class="card-header">
                 {{ empty($response->user) ? $response->customer->name : $response->user->nama}}
             </div>
