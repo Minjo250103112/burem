@@ -44,6 +44,9 @@ Route::prefix('ticket')->name('ticket.')->group(function () {
     Route::post('/', [CustomerTicketController::class, 'store'])->name('store');
     Route::get('/create', [CustomerTicketController::class, 'create'])->name('create');
     Route::get('{code}', [CustomerTicketController::class, 'show'])->name('show');
+    Route::get('/reply-ticket/{code}', [CustomerTicketController::class, 'reply'])->name('reply');
+    Route::post('/reply-ticket', [CustomerTicketController::class, 'response'])->name('response');
+    Route::get('/closed/{id}/finish', [CustomerTicketController::class, 'closed'])->name('closed');
 });
 
 Route::prefix('ticket-customer')->name('ticket-customer.')->group(function () {

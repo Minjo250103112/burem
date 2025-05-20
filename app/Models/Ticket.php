@@ -25,4 +25,14 @@ class Ticket extends Model
     {
         return $this->belongsTo(Package::class, 'package_id', 'id');
     }
+
+    /**
+     * Get all of the responses for the Ticket
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function responses()
+    {
+        return $this->hasMany(TicketResponse::class, 'ticket_id', 'id');
+    }
 }

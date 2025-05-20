@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerPackage;
 use App\Models\Department;
 use App\Models\Ticket;
+use App\Models\TicketResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,5 +73,65 @@ class CustomerTicketController extends Controller
         }
 
         return view('layouts.pages.customers.show', compact(['ticket', 'badge', 'text', 'badge_status', 'status']));
+    }
+
+    public function reply($code)
+    {
+        $ticket = Ticket::where('code', $code)->get()->first();
+
+        if (empty($ticket)) {
+            return redirect()->back()->with(['danger' => 'Tiket tidak ada!']);
+        }
+
+        if ($ticket->priority == 2) {
+            $badge = 'bg-warning';
+            $text = 'Sedang';
+        } elseif ($ticket->priority == 2) {
+            $badge = 'bg-danger';
+            $text = 'Tinggi';
+        } else {
+            $badge = 'bg-primary';
+            $text = 'Rendah';
+        }
+
+        return view('layouts.pages.customers.reply-ticket', compact(['badge', 'text', 'ticket']));
+    }
+
+    public function response(Request $request)
+    {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->role == 'user') {
+        $column = 'user_id';
+        $id = Auth::guard('web')->user()->id;
+        } elseif (Auth::guard('customer')->check()) {
+            $column = 'customer_id';
+            $id = Auth::guard('customer')->user()->id;
+        } else {
+            // Handle case where neither guard is authenticated
+            // You might want to redirect or throw an exception here
+            throw new \Exception('No authenticated user found');
+        }
+
+        $file = empty($request->file('file')) ? null : $request->file('file')->store('file');
+
+        $response = TicketResponse::create([
+            'ticket_id' => $request->ticket_id,
+            ''.$column.'' => $id,
+            'message' => $request->message,
+            'file' => $file
+        ]);
+
+        return redirect()->route('ticket.show', ['code' => $request->code])->with(['success' => 'Balasan laporan berhasil dibuat.']);
+    }
+
+    public function closed($id)
+    {
+        $ticket = Ticket::find($id);
+
+        if (empty($ticket)) {
+            return redirect()->back()->with(['danger' => 'Tiket tidak ada!']);
+        }
+
+        $ticket->update(['status' => 2]);
+        return redirect()->back()->with(['success' => 'Laporan berhasil ditutup.']);
     }
 }
