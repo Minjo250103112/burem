@@ -5,11 +5,19 @@
     <link href="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Data Pelanggan</h6>
-                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
+                <a href="{{ route('customer.create') }}" class="btn btn-primary btn-sm"><i class="fas fa-fw fa-plus"></i> Tambah Data</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -30,12 +38,12 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $customer->name }}</td>
-                                <td>-</td>
+                                <td>{{ $customer->agency }}</td>
                                 <td>-</td>
                                 <td>{{ $customer->email }}</td>
                                 <td>
                                     <a href="" class="btn btn-primary"><i class="fas fa-fw fa-eye"></i></a>
-                                    <a href="" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
+                                    <a href="{{ route('customer.edit', ['id' => $customer->id]) }}" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
                                     <a href="" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
                                 </td>
                             </tr>

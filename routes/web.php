@@ -57,8 +57,11 @@ Route::prefix('ticket-customer')->name('ticket-customer.')->group(function () {
 
 Route::prefix('customer')->name('customer.')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('index');
+    Route::post('/', [CustomerController::class, 'store'])->name('store');
     Route::get('/create', [CustomerController::class, 'create'])->name('create');
     Route::get('/detail/{id}', [CustomerController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [CustomerController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [CustomerController::class, 'update'])->name('update');
 });
 
 Route::prefix('report')->name('report.')->group(function () {

@@ -18,6 +18,7 @@ class CustomerSeeder extends Seeder
         DB::table('customers')->insert([
             [
                 'name' => 'Pelanggan 1',
+                'agency' => 'SMK Muhammadiyah 1 Tegal',
                 'email' => 'pelanggan1@mail.com',
                 'address' => '-',
                 'phone' => '-',
@@ -25,6 +26,7 @@ class CustomerSeeder extends Seeder
             ],
             [
                 'name' => 'Pelanggan 2',
+                'agency' => 'SD Negeri Jatilaba 2',
                 'email' => 'pelanggan2@mail.com',
                 'address' => '-',
                 'phone' => '-',
@@ -32,6 +34,7 @@ class CustomerSeeder extends Seeder
             ],
             [
                 'name' => 'Pelanggan 3',
+                'agency' => 'SMP Negeri 1 Brebes',
                 'email' => 'pelanggan3@mail.com',
                 'address' => '-',
                 'phone' => '-',

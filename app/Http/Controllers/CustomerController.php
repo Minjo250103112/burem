@@ -19,8 +19,52 @@ class CustomerController extends Controller
         return view('layouts.pages.users.show-customer', compact('data'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('layouts.pages.users.create-customer');
+    }
+
+    public function store(Request $request)
+    {
+        $customer = Customer::create([
+            'agency' => $request->agency,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'password' => bcrypt(12345),
+        ]);
+
+        return redirect()->route('customer.index')->with(['success' => 'Pelanggan berhasil dibuat.']);
+    }
+
+    public function edit($id)
+    {
+        $customer = Customer::find($id);
+
+        if (empty($customer)) {
+            return redirect()->back()->with(['danger' => 'Pelanggan tidak ada!']);
+        }
+
+        return view('layouts.pages.users.edit-customer', compact('customer'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+
+        if (empty($customer)) {
+            return redirect()->back()->with(['danger' => 'Pelanggan tidak ada!']);
+        }
+
+        $customer->update([
+            'agency' => $request->agency,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+
+        return redirect()->back()->with(['success' => 'Pelanggan berhasil diubah.']);
     }
 }
