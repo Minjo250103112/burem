@@ -70,6 +70,10 @@ Route::prefix('report')->name('report.')->group(function () {
 
 Route::prefix('departement')->name('departement.')->group(function () {
     Route::get('/', [DepartementController::class, 'index'])->name('index');
+    Route::post('/', [DepartementController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [DepartementController::class, 'show'])->name('show');
+    Route::put('{id}', [DepartementController::class, 'update'])->name('update');
+    Route::delete('{id}', [DepartementController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('package')->name('package.')->group(function () {
