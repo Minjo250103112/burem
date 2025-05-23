@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->integer('price');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

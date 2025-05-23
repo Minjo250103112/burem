@@ -78,6 +78,10 @@ Route::prefix('departement')->name('departement.')->group(function () {
 
 Route::prefix('package')->name('package.')->group(function () {
     Route::get('/', [PackageController::class, 'index'])->name('index');
+    Route::post('/', [PackageController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [PackageController::class, 'show'])->name('show');
+    Route::put('/{id}', [PackageController::class, 'update'])->name('update');
+    Route::delete('/{id}', [PackageController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('user')->name('user.')->group(function () {
