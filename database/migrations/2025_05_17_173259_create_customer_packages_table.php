@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('customer_packages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('domain');
             $table->integer('customer_id');
             $table->integer('package_id');
             $table->tinyInteger('status')->default(1);

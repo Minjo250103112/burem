@@ -58,6 +58,10 @@ Route::prefix('ticket-customer')->name('ticket-customer.')->group(function () {
 Route::prefix('customer')->name('customer.')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('index');
     Route::post('/', [CustomerController::class, 'store'])->name('store');
+    Route::post('package', [CustomerController::class, 'customerPackage'])->name('store-package');
+    Route::get('package/detail/{id}', [CustomerController::class, 'custPackageShow'])->name('show-customer-package');
+    Route::put('package/{id}', [CustomerController::class, 'custPackageUpdate'])->name('update-customer-package');
+    Route::delete('package/{id}', [CustomerController::class, 'destroy'])->name('destroy');
     Route::get('/create', [CustomerController::class, 'create'])->name('create');
     Route::get('/detail/{id}', [CustomerController::class, 'show'])->name('show');
     Route::get('/{id}/edit', [CustomerController::class, 'edit'])->name('edit');

@@ -18,21 +18,19 @@ class CustomerPackageSeeder extends Seeder
         DB::table('customer_packages')->insert([
             [
                 'customer_id' => 1,
+                'domain' => 'mututegal.sch.id',
                 'package_id' => 1,
                 'status' => 1,
             ],
             [
                 'customer_id' => 2,
+                'domain' => 'sdnjatilaba2.sch.id',
                 'package_id' => 1,
                 'status' => 1,
             ],
             [
-                'customer_id' => 2,
-                'package_id' => 2,
-                'status' => 1,
-            ],
-            [
-            'customer_id' => 3,
+                'customer_id' => 3,
+                'domain' => 'smpnegeri1brebes.sch.id',
                 'package_id' => 2,
                 'status' => 1,
             ],

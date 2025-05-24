@@ -15,4 +15,9 @@ class CustomerPackage extends Model
     {
         return $this->belongsTo(Package::class, 'package_id', 'id');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }

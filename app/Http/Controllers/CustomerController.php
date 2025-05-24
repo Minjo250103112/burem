@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerPackage;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -15,8 +17,15 @@ class CustomerController extends Controller
 
     public function show($id)
     {
-        $data = $id;
-        return view('layouts.pages.users.show-customer', compact('data'));
+        $customer = Customer::find($id);
+        $packages = Package::all();
+        $package_customers = CustomerPackage::where('customer_id', $id)->get();
+
+        if (empty($customer)) {
+            return redirect()->back()->with(['danger' => 'Pelanggan tidak ada!']);
+        }
+
+        return view('layouts.pages.users.show-customer', compact(['customer', 'packages', 'package_customers']));
     }
 
     public function create()
@@ -66,5 +75,63 @@ class CustomerController extends Controller
         ]);
 
         return redirect()->back()->with(['success' => 'Pelanggan berhasil diubah.']);
+    }
+
+    public function customerPackage(Request $request)
+    {
+        $package_customer = CustomerPackage::create([
+            'domain' => $request->domain,
+            'customer_id' => $request->customer_id,
+            'package_id' => $request->package_id,
+            'status' => $request->status,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data paket berhasil disimpan.'
+        ]);
+    }
+
+    public function custPackageShow($id)
+    {
+        $Customer_package = CustomerPackage::find($id);
+        if (empty($Customer_package)) {
+            return response()->json(null);
+        }
+        return response()->json($Customer_package);
+    }
+
+    public function custPackageUpdate(Request $request, $id)
+    {
+        $Customer_package = CustomerPackage::find($id);
+        if (empty($Customer_package)) {
+            return response()->json(null);
+        }
+        $Customer_package->update([
+            'domain' => $request->domain,
+            'customer_id' => $request->customer_id,
+            'package_id' => $request->package_id,
+            'status' => $request->status,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data paket berhasil disimpan.'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $Customer_package = CustomerPackage::find($id);
+        if (empty($Customer_package)) {
+            return response()->json(null);
+        }
+
+        $Customer_package->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data layanan berhasil dihapus'
+        ]);
     }
 }
