@@ -10,6 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 class Customer extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    
+
     protected $guarded = [];
+
+    public function packages()
+    {
+        return $this->hasMany(CustomerPackage::class, 'customer_id', 'id');
+    }
 }

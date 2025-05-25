@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="inputdivisi">Divisi</label>
                         <select class="form-control" name="department_id" required>
                             <option value="" selected disabled>---Pilih Divisi---</option>
@@ -40,7 +40,7 @@
                             @endforelse
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="inputemail">Layanan</label>
                         <select class="form-control" name="package_id" required>
                             <option value="" selected disabled>---Pilih Layanan---</option>
@@ -51,7 +51,7 @@
                             @endforelse
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
+                    {{-- <div class="form-group col-md-4">
                         <label for="inputemail">Prioritas</label>
                         <select class="form-control" name="priority" required>
                             <option value="" selected disabled>---Pilih Prioritas---</option>
@@ -59,7 +59,7 @@
                             <option value="2">Sedang</option>
                             <option value="3">Tinggi</option>
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Subjek</label>

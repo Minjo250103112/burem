@@ -45,6 +45,7 @@
                                     <a href="{{ route('customer.show', ['id' => $customer->id]) }}" class="btn btn-primary"><i class="fas fa-fw fa-eye"></i></a>
                                     <a href="{{ route('customer.edit', ['id' => $customer->id]) }}" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
                                     <a href="" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
+                                    <a href="{{ route('ticket-customer.create', ['id' => $customer->id]) }}" class="btn btn-success"><i class="fas fa-fw fa-flag"></i></a>
                                 </td>
                             </tr>
                             @empty

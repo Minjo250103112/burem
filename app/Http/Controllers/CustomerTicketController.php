@@ -30,13 +30,14 @@ class CustomerTicketController extends Controller
     {
         $now = now()->format('dmYHi');
         $file = empty($request->file('file')) ? null : $request->file('file')->store('file');
+        $priority = !empty($request->admin) ? $request->priority : 0;
 
         $customer = Ticket::create([
             'code' => $now,
             'customer_id' => $request->customer_id,
             'department_id' => $request->department_id,
             'package_id' => $request->package_id,
-            'priority' => $request->priority,
+            'priority' => $priority,
             'subject' => $request->subject,
             'content' => $request->content,
             'file' => $file,
@@ -53,15 +54,18 @@ class CustomerTicketController extends Controller
             return redirect()->back()->with(['danger' => 'Tiket tidak ada!']);
         }
 
-        if ($ticket->priority == 2) {
+        if ($ticket->priority == 1) {
+            $badge = 'bg-primary';
+            $text = 'Rendah';
+        } elseif ($ticket->priority == 2) {
             $badge = 'bg-warning';
             $text = 'Sedang';
-        } elseif ($ticket->priority == 2) {
+        } elseif ($ticket->priority == 3) {
             $badge = 'bg-danger';
             $text = 'Tinggi';
         } else {
-            $badge = 'bg-primary';
-            $text = 'Rendah';
+            $badge = 'bg-secondary';
+            $text = 'Belum Ditentukan';
         }
 
         if ($ticket->status == 1) {
@@ -106,8 +110,6 @@ class CustomerTicketController extends Controller
             $column = 'customer_id';
             $id = Auth::guard('customer')->user()->id;
         } else {
-            // Handle case where neither guard is authenticated
-            // You might want to redirect or throw an exception here
             throw new \Exception('No authenticated user found');
         }
 
