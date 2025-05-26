@@ -92,5 +92,12 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
 });
 
+Route::prefix('profile')->name('profile.')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('index');
+    Route::post('/', [ProfileController::class, 'updateUser'])->name('user');
+    Route::post('customer', [ProfileController::class, 'updateCustomer'])->name('customer');
+    Route::post('update/password', [ProfileController::class, 'updatePassword'])->name('change-password');
+});
+
 
 require __DIR__.'/auth.php';

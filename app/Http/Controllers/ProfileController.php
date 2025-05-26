@@ -2,59 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function index()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+        if (Auth::guard('web')->check()) {
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+            return view('layouts.pages.profile.user');
+        } elseif (Auth::guard('customer')->check()) {
+            $customer = Customer::find(Auth::guard('customer')->user()->id);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            return view('layouts.pages.profile.customer', compact('customer'));
+        } else {
+            return response()->json('Unauthorized!');
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function updateCustomer(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current-password'],
+        $customer = Customer::find($request->id);
+
+        $customer->update([
+            'agency' => $request->agency,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
         ]);
 
-        $user = $request->user();
+        return redirect()->back()->with(['success' => 'Profil berhasil diubah.']);
+    }
 
-        Auth::logout();
+    public function updateUser(Request $request)
+    {
+        $customer = Customer::find($request->id);
 
-        $user->delete();
+        $customer->update([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'nomor_telepon' => $request->nomor_telepon,
+            'alamat' => $request->alamat,
+        ]);
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        return redirect()->back()->with(['success' => 'Profil berhasil diubah.']);
+    }
 
-        return Redirect::to('/');
+    public function updatePassword(Request $request)
+    {
+        if (Auth::guard('web')->check()) {
+            $user = User::find(Auth::guard('web')->user()->id);
+
+            if (!Hash::check($request->current, Auth::guard('web')->user()->password)) {
+                return redirect()->back()->with('error', 'Password lama tidak sesuai!')->withInput(['current']);
+            }
+
+            $user->fill([
+                'password' => Hash::make($request->new)
+            ])->save();
+
+            return redirect()->back()->with(['success' => 'Password berhasil diubah.']);
+        } elseif (Auth::guard('customer')->check()) {
+            $customer = Customer::find(Auth::guard('customer')->user()->id);
+
+            if (!Hash::check($request->current, Auth::guard('customer')->user()->password)) {
+                return redirect()->back()->with('error', 'Password lama tidak sesuai!')->withInput(['current']);
+            }
+
+            $customer->fill([
+                'password' => Hash::make($request->new)
+            ])->save();
+
+            return redirect()->back()->with(['success' => 'Password berhasil diubah.']);
+        } else {
+            return response()->json('Unauthorized!');
+        }
     }
 }
