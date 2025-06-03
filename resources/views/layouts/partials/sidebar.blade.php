@@ -40,7 +40,7 @@
         </div>
     </li>
     <li class="nav-item {{ Request::is('report*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('report.index') }}">
+        <a class="nav-link" href="{{ route('report.index') }}?bulan={{ Carbon\Carbon::now()->format('m') }}&tahun={{ Carbon\Carbon::now()->format('Y') }}">
             <i class="fas fa-fw fa-file"></i>
             <span>Laporan</span></a>
     </li>
@@ -57,7 +57,7 @@
             <span>Pelanggan</span></a>
     </li>
     <li class="nav-item {{ Request::is('report*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('report.index') }}">
+        <a class="nav-link" href="{{ route('report.index') }}?bulan={{ Carbon\Carbon::now()->format('m') }}&tahun={{ Carbon\Carbon::now()->format('Y') }}">
             <i class="fas fa-fw fa-file"></i>
             <span>Laporan</span></a>
     </li>

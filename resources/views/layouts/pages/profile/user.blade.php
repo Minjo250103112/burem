@@ -10,6 +10,14 @@
             </button>
         </div>
     @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ $message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-lg-6 mb-4">
             <div class="card shadow mb-4">
@@ -53,20 +61,21 @@
                     <h6 class="m-0 font-weight-bold text-primary">Ubah Password</h6>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{ route('profile.change-password') }}"  method="POST" enctype="application/x-www-form-urlencoded">
+                        @csrf
                         <div class="form-group">
                             <label for="inputAddress">Password Lama</label>
-                            <input type="text" class="form-control" id="inputsubject"
+                            <input type="password" class="form-control" id="inputsubject"
                                 placeholder="Masukkkan password lama.." name="current" required>
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Password Baru</label>
-                            <input type="text" class="form-control" id="inputsubject"
+                            <input type="password" class="form-control" id="inputsubject"
                                 placeholder="Masukkkan password baru.." name="new" required>
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Konfirmasi Password</label>
-                            <input type="text" class="form-control" id="inputsubject"
+                            <input type="password" class="form-control" id="inputsubject"
                                 placeholder="Masukkkan konfirmasi password.." name="confirm" required>
                         </div>
                         <div class="text-center">

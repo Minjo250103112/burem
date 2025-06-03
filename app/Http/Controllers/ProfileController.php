@@ -13,8 +13,9 @@ class ProfileController extends Controller
     public function index()
     {
         if (Auth::guard('web')->check()) {
+            $user = User::find(Auth::guard('web')->user()->id);
 
-            return view('layouts.pages.profile.user');
+            return view('layouts.pages.profile.user', compact(('user')));
         } elseif (Auth::guard('customer')->check()) {
             $customer = Customer::find(Auth::guard('customer')->user()->id);
 
@@ -41,7 +42,7 @@ class ProfileController extends Controller
 
     public function updateUser(Request $request)
     {
-        $customer = Customer::find($request->id);
+        $customer = User::find($request->id);
 
         $customer->update([
             'nama' => $request->nama,

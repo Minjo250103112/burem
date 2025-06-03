@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
+            $table->string('code', 20);
             $table->integer('customer_id');
             $table->integer('department_id');
             $table->integer('package_id');
-            $table->string('priority');
+            $table->string('priority', 10);
             $table->string('subject');
             $table->longText('content');
             $table->string('file')->nullable();
