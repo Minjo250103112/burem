@@ -63,6 +63,11 @@
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Dokumen</label>
+                    @if (empty($ticket->file))
+                        <p>-</p>
+                    @else
+                        <a href="{{ asset('file/' . $ticket->file) }}" target="_blank">Lihat File</a>
+                    @endif
                 </div>
                 @if ($ticket->status == 1)
                 <div class="text-right">

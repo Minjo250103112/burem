@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title', 'Buat Laporan')
 @section('title-content', 'Buat Laporan')
+@push('styles')
+    <style>
+        .custom-radio-group {
+            border: none;
+            /* Hilangkan border */
+            text-align: justify;
+            /* Rata kanan kiri */
+        }
+    </style>
+@endpush
 @section('content')
     @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -22,11 +32,13 @@
                         <label for="inputname">Nama</label>
                         <input type="text" hidden name="admin" value="{{ $customer->id }}">
                         <input type="text" hidden name="customer_id" value="{{ $customer->id }}">
-                        <input type="text" class="form-control" id="inputname" name="name" value="{{ $customer->name }}" disabled>
+                        <input type="text" class="form-control" id="inputname" name="name"
+                            value="{{ $customer->name }}" disabled>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputemail">Email</label>
-                        <input type="text" class="form-control" id="inputemail" name="email" value="{{ $customer->email }}" disabled>
+                        <input type="text" class="form-control" id="inputemail" name="email"
+                            value="{{ $customer->email }}" disabled>
                     </div>
                 </div>
                 <div class="form-row">
@@ -35,7 +47,8 @@
                         <select class="form-control" name="department_id" required>
                             <option value="" selected disabled>---Pilih Divisi---</option>
                             @forelse ($departments as $department)
-                                <option value="{{ $department->id }}">{{ $department->code }} | {{ $department->name }}</option>
+                                <option value="{{ $department->id }}">{{ $department->code }} | {{ $department->name }}
+                                </option>
                             @empty
                                 <option value=""></option>
                             @endforelse
@@ -46,29 +59,43 @@
                         <select class="form-control" name="package_id" required>
                             <option value="" selected disabled>---Pilih Layanan---</option>
                             @forelse ($customer->packages as $package)
-                                <option value="{{ $package->package_id }}">{{ $package->package->code }} | {{ $package->package->name }}</option>
+                                <option value="{{ $package->package_id }}">{{ $package->package->code }} |
+                                    {{ $package->package->name }}</option>
                             @empty
                                 <option value=""></option>
                             @endforelse
                         </select>
-                    </div>
+                    </div>                                          
                     <div class="form-group col-md-4">
                         <label for="inputemail">Prioritas</label>
-                        <select class="form-control" name="priority" required>
-                            <option value="" selected disabled>---Pilih Prioritas---</option>
-                            <option value="1">Rendah</option>
-                            <option value="2">Sedang</option>
-                            <option value="3">Tinggi</option>
-                        </select>
+                        <div class="custom-radio-group px-3 py-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="priority" id="inlineRadio1"
+                                    value="1">
+                                <label class="form-check-label" for="inlineRadio1">Rendah</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="priority" id="inlineRadio2"
+                                    value="2">
+                                <label class="form-check-label" for="inlineRadio2">Sedang</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="priority" id="inlineRadio3"
+                                    value="3">
+                                <label class="form-check-label" for="inlineRadio3">Tinggi</label>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Subjek</label>
-                    <input type="text" class="form-control" id="inputsubject" placeholder="Masukkkan Subjek.." name="subject" required>
+                    <input type="text" class="form-control" id="inputsubject" placeholder="Masukkkan Subjek.."
+                        name="subject" required>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Pesan</label>
-                    <textarea  class="form-control" id="content" rows="3" name="content" required></textarea>
+                    <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">File</label>
