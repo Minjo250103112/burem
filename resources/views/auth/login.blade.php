@@ -102,7 +102,7 @@
 
     <!-- Footer -->
         <div class="footer bg-primary text-white">
-            &copy; {{ date('Y') }} SICUREM | PT. Bumi Tekno Indonesia | ISMI A_UTD
+            &copy; {{ date('Y') }} SICUREM | PT. Bumi Tekno Indonesia | ISMI A DIGITECH
         </div>
 
 

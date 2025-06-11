@@ -41,11 +41,16 @@
                         <input type="text" class="form-control" id="inputdepartment" name="package_id"
                             value="{{ $ticket->package->name }}" disabled>
                     </div>
+                    
                     <div class="form-group col-md-3">
-                        <label for="inputemail">Prioritas</label>
-                        <input type="text" class="form-control {{ $badge }}" id="inputdepartment" name="priority"
-                            value="{{ $text }}" style="font-weight: bold; color: white;" disabled>
+                        <label for="prioritas">Prioritas</label>
+                        <select id="prioritas" name="priority" class="form-control {{ $badge }}" style="font-weight: bold; color: white;">
+                            <option value="Rendah" {{ $text == 'Rendah' ? 'selected' : '' }}>Rendah</option>
+                            <option value="Sedang" {{ $text == 'Sedang' ? 'selected' : '' }}>Sedang</option>
+                            <option value="Tinggi" {{ $text == 'Tinggi' ? 'selected' : '' }}>Tinggi</option>
+                        </select>
                     </div>
+
                     <div class="form-group col-md-3">
                         <label for="inputemail">Status</label>
                         <input type="text" class="form-control {{ $badge_status }}" id="inputdepartment" name="status"

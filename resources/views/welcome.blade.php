@@ -14,8 +14,8 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f1f5f9; /* abu muda */
-            color: #1e293b; /* teks lebih gelap */
+            background-color: #f1f5f9;
+            color: #1e293b;
             font-family: Arial, sans-serif;
             text-align: center;
             min-height: 100vh;
@@ -63,34 +63,14 @@
             background-color: #2563eb;
         }
 
-        .logos-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 40px;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
+        .logo {
+            margin-bottom: 40px;
+        }
 
-    .logo-item {
-        width: 150px;
-        background: transparent;
-        display: flex;
-        justify-content: center;
-    }
-
-    .logo-item img {
-        width: 100%;
-        max-width: 120px;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .separator {
-        width: 2px;
-        height: 60px;
-        background-color: #cbd5e1; /* abu muda */
-    }
+        .logo img {
+            max-width: 120px;
+            height: auto;
+        }
 
         .footer {
             background-color: #e2e8f0;
@@ -102,28 +82,19 @@
     </style>
 </head>
 <body class="antialiased">
-    <div class="brand">BUMI SICUREM</div>
+  
 
     <div class="container">
-                <div class="logos-container">
-                    <div class="logo-item">
-                        <img src="{{ asset('storage/img/UTD.png') }}" alt="Logo UTD">
-                    </div>
-
-                    <div class="separator"></div> <!-- Garis tengah -->
-                    
-                    <div class="logo-item">
-                        <img src="{{ asset('storage/img/logo.png') }}" alt="Logo Bumitekno">
-                    </div>
-                </div>
+        <div class="logo">
+            <img src="{{ asset('storage/img/logo.png') }}" alt="Logo Bumitekno">
+        </div>
         <h1>Selamat Datang di<br>Website SICUREM</h1>
         <h3>Sistem Informasi Customer Relationship Management<br>Pengaduan Keluhan Layanan Anda Lebih Efektif dan Efisien</h3>
         <a href="{{ route('login') }}" class="btn">Mulai Sekarang</a>
-
     </div>
 
     <div class="footer">
-        &copy; {{ date('Y') }} SICUREM | PT. Bumi Tekno Indonesia| ISMI A_UTD
+        &copy; {{ date('Y') }} SICUREM | PT. Bumi Tekno Indonesia | ISMI A DIGITECH
     </div>
 </body>
 </html>

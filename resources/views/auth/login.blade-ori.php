@@ -63,7 +63,7 @@
 
          <!-- Footer -->
          <div class="w-full sm:max-w-md mt-4 px-6 py-3 text-center text-xs text-gray-500 dark:text-gray-400">
-                <p>&copy; {{ date('Y') }} SICUREM.ISMI AMELIA_UTD All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} SICUREM.ISMI A</p>
                
             </div>
         

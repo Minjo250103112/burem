@@ -53,6 +53,8 @@ Route::prefix('ticket-customer')->name('ticket-customer.')->group(function () {
     Route::get('/', [TicketController::class, 'index'])->name('index');
     Route::get('/new/{id}/create', [TicketController::class, 'create'])->name('create');
     Route::get('/detail/{id}', [TicketController::class, 'show'])->name('show');
+    Route::get('/customer/ticket/{id}', [CustomerTicketController::class, 'show'])->name('customer.ticket.show');
+
 });
 
 Route::prefix('customer')->name('customer.')->group(function () {

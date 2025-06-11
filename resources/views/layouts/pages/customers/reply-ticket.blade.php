@@ -20,10 +20,16 @@
                         <label for="inputemail">Paket</label>
                         <input type="text" class="form-control" id="inputemail" name="package" value="{{ $ticket->package->name }}" disabled>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputemail">Prioritas</label>
-                        <input type="text" class="form-control {{ $badge }}" id="inputemail" name="email" value="{{ $text }}" style="font-weight: bold; color: white;" disabled>
-                    </div>
+                       <div class="form-group col-md-4">
+                            <label for="prioritas">Prioritas</label>
+                            <select id="prioritas" name="prioritas" class="form-control {{ $badge }}" style="font-weight: bold; color: white;">
+                                <option value="Rendah" {{ $text == 'Rendah' ? 'selected' : '' }}>Rendah</option>
+                                <option value="Sedang" {{ $text == 'Sedang' ? 'selected' : '' }}>Sedang</option>
+                                <option value="Tinggi" {{ $text == 'Tinggi' ? 'selected' : '' }}>Tinggi</option>
+                            </select>
+                        </div>
+
+
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Subjek</label>
