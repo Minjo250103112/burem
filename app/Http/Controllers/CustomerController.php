@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\CustomerPackage;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CustomerController extends Controller
 {
@@ -133,5 +134,21 @@ class CustomerController extends Controller
             'success' => true,
             'message' => 'Data layanan berhasil dihapus'
         ]);
+    }
+
+    public function reset($id)
+    {
+        $customer = Customer::find($id);
+
+        if (empty($customer)) {
+            return redirect()->back()->with(['danger' => 'Pelanggan tidak ada!']);
+        }
+
+        $pass = Str::random(8);
+
+        $customer->password = bcrypt($pass);
+        $customer->save();
+
+        return redirect()->back()->with(['success' => 'Password berhasil diubah '. $pass .'.']);
     }
 }

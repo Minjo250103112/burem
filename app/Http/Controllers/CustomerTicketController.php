@@ -136,4 +136,22 @@ class CustomerTicketController extends Controller
         $ticket->update(['status' => 2]);
         return redirect()->back()->with(['success' => 'Laporan berhasil ditutup.']);
     }
+
+    public function priority(Request $request, $id)
+    {
+        // dd($request->all());
+        $ticket = Ticket::find($id);
+
+        if (empty($ticket)) {
+            return redirect()->back()->with(['danger' => 'Tiket tidak ada!']);
+        }
+
+        $priority = $request->get('priority');
+
+        // $ticket->update(['priority' => $request->priority]);
+        $ticket->priority = $priority;
+        $ticket->save();
+
+        return redirect()->back()->with(['success' => 'Laporan berhasil diperbarui.']);
+    }
 }

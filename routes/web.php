@@ -44,6 +44,7 @@ Route::prefix('ticket')->name('ticket.')->group(function () {
     Route::post('/', [CustomerTicketController::class, 'store'])->name('store');
     Route::get('/create', [CustomerTicketController::class, 'create'])->name('create');
     Route::get('{code}', [CustomerTicketController::class, 'show'])->name('show');
+    Route::get('priority/{id}/get/value', [CustomerTicketController::class, 'priority'])->name('priority');
     Route::get('/reply-ticket/{code}', [CustomerTicketController::class, 'reply'])->name('reply');
     Route::post('/reply-ticket', [CustomerTicketController::class, 'response'])->name('response');
     Route::get('/closed/{id}/finish', [CustomerTicketController::class, 'closed'])->name('closed');
@@ -68,6 +69,7 @@ Route::prefix('customer')->name('customer.')->group(function () {
     Route::get('/detail/{id}', [CustomerController::class, 'show'])->name('show');
     Route::get('/{id}/edit', [CustomerController::class, 'edit'])->name('edit');
     Route::put('/{id}', [CustomerController::class, 'update'])->name('update');
+    Route::get('reset/{id}/password/admin', [CustomerController::class, 'reset'])->name('reset');
 });
 
 Route::prefix('report')->name('report.')->group(function () {

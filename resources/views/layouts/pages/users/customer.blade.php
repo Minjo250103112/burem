@@ -46,6 +46,7 @@
                                     <a href="{{ route('customer.edit', ['id' => $customer->id]) }}" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
                                     <a href="" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
                                     <a href="{{ route('ticket-customer.create', ['id' => $customer->id]) }}" class="btn btn-success"><i class="fas fa-fw fa-flag"></i></a>
+                                    <a onclick="updatePassword('{{ route('customer.reset', ['id' => $customer->id]) }}')" class="btn btn-secondary"><i class="fas fa-fw fa-key"></i></a>
                                 </td>
                             </tr>
                             @empty
@@ -61,6 +62,14 @@
     </div>
 @endsection
 @push('script')
+<script>
+    function updatePassword(routeUrl) {
+        if (confirm('Apakah yakin mereset password ?')) {
+            // User clicked "Yes"
+            window.location.href = routeUrl;
+        }
+    }
+</script>
 <script src="{{ asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('template/js/demo/datatables-demo.js') }}"></script>

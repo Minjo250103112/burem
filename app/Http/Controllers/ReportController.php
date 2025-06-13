@@ -63,36 +63,6 @@ class ReportController extends Controller
 
         $tahuns = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
 
-        // $data = [];
-        // $bulan_now = Carbon::now()->format('m');
-        // $tahun_now = Carbon::now()->format('Y');
-
-        // $bulan = $request->get('bulan');
-        // $tahun = $request->get('tahun');
-
-        // $today = Carbon::parse("$tahun-$bulan-01");
-
-        // $tikets = Ticket::whereMonth('created_at', $bulan)->whereYear('created_at', $tahun)
-        //         ->orderBy('created_at', 'ASC')
-        //         ->get();
-
-        // for ($i = 1; $i < $today->daysInMonth + 1; ++$i) {
-        //     $dates[] = \Carbon\Carbon::createFromDate($today->year, $today->month, $i)->format('Y-m-d');
-        // }
-
-        // foreach ($dates as $date) {
-        //     // $riwayat = collect($riwayats)->where('tanggal', $date)->first();
-        //     $customer = collect($tikets)->where('created_at', $date)->groupBy('customer_id')->map(function ($item, $key) {
-        //                     return $item->count();
-        //                 });
-        //     $ticket = collect($tikets)->where('created_at', $date)->count();
-        //     $data[] = [
-        //         'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
-        //         'customers' => $customer,
-        //         'tickets' => $ticket,
-        //     ];
-        // }
-
         $data = [];
         $bulan_now = Carbon::now()->format('m');
         $tahun_now = Carbon::now()->format('Y');
@@ -130,7 +100,7 @@ class ReportController extends Controller
                 'tanggal' => Carbon::parse($date)->translatedFormat('d F Y'),
                 'customers' => collect($customers)->count(),
                 'tickets' => $ticketCount,
-                'done' => $ticketCount,
+                'done' => collect($done)->count(),
             ];
         }
 
