@@ -29,7 +29,7 @@
                             </select>
                         </div> --}}
 
-                         <div class="form-group col-md-4">Add commentMore actions
+                         <div class="form-group col-md-4">
                             <label for="inputemail">Prioritas</label>
                             <input type="text" class="form-control {{ $badge }}" id="inputemail" name="email" value="{{ $text }}" style="font-weight: bold; color: white;" disabled>
                         </div>

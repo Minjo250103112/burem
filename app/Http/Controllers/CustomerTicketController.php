@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\CustomerPackage;
 use App\Models\Department;
 use App\Models\Ticket;
 use App\Models\TicketResponse;
+use App\Models\User;
+use App\Notifications\TicketNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class CustomerTicketController extends Controller
 {
@@ -43,15 +47,41 @@ class CustomerTicketController extends Controller
             'file' => $file,
         ]);
 
+        $message = ''.Auth::guard('customer')->user()->name.' membuat laporan / tiket baru dengan nomor '. $customer->code .'';
+        $type = 'ticket';
+        $link = route('ticket.show', ['code' => $customer->code]);
+
+        $users = User::where('department_id', $request->department_id)->orWhere('role', '=', 'admin')->get();
+
+        Notification::send($users, new TicketNotification($message, $type, $link));
+
         return redirect()->back()->with(['success' => 'Tiket berhasil dibuat dengan nomor tiket '. $customer->code .'']);
     }
 
-    public function show($code)
+    public function show(Request $request, $code)
     {
         $ticket = Ticket::where('code', $code)->get()->first();
 
         if (empty($ticket)) {
             return redirect()->back()->with(['danger' => 'Tiket tidak ada!']);
+        }
+
+        // if ($request->has('key')) {
+        //     $notification = $request->user()->notifications()->find($request->key);
+        //     if ($notification && is_null($notification->read_at)) {
+        //         $notification->markAsRead();
+        //     }
+        // }
+
+        $user = Auth::guard('web')->check()
+            ? Auth::guard('web')->user()
+            : (Auth::guard('customer')->check() ? Auth::guard('customer')->user() : null);
+
+        if ($request->has('key')) {
+            $notification = $user->notifications()->find($request->key);
+            if ($notification && is_null($notification->read_at)) {
+                $notification->markAsRead();
+            }
         }
 
         if ($ticket->priority == 1) {
@@ -79,8 +109,19 @@ class CustomerTicketController extends Controller
         return view('layouts.pages.customers.show', compact(['ticket', 'badge', 'text', 'badge_status', 'status']));
     }
 
-    public function reply($code)
+    public function reply(Request $request, $code)
     {
+        $user = Auth::guard('web')->check()
+            ? Auth::guard('web')->user()
+            : (Auth::guard('customer')->check() ? Auth::guard('customer')->user() : null);
+
+        if ($request->has('key')) {
+            $notification = $user->notifications()->find($request->key);
+            if ($notification && is_null($notification->read_at)) {
+                $notification->markAsRead();
+            }
+        }
+
         $ticket = Ticket::where('code', $code)->get()->first();
 
         if (empty($ticket)) {
@@ -106,12 +147,30 @@ class CustomerTicketController extends Controller
         if (Auth::guard('web')->check()) {
             $column = 'user_id';
             $id = Auth::guard('web')->user()->id;
+            $name = Auth::guard('web')->user()->nama;
+            $ticket = Ticket::find($request->ticket_id);
+            $users = Customer::find($ticket->customer_id);
         } elseif (Auth::guard('customer')->check()) {
             $column = 'customer_id';
             $id = Auth::guard('customer')->user()->id;
+            $name = Auth::guard('customer')->user()->name;
+            $ticket = Ticket::find($request->ticket_id);
+            $responses = TicketResponse::where('ticket_id', $request->ticket_id)->get();
+            $hasUserResponses = $responses->whereNotNull('user_id')->count() > 0;
+            // $users = empty($responses) ? User::where('department_id', $ticket->department_id)->orWhere('role', '=', 'admin')->get() : User::whereIn('id', $responses)->get();
+            // $users = empty($responses) ? User::where('department_id', $ticket->department_id)->orWhere('role', '=', 'admin')->get() : User::whereIn('id', $responses)->get();
+            if (!$hasUserResponses) {
+                $id_user = '';
+                $users = User::where('department_id', $ticket->department_id)->orWhere('role', '=', 'admin')->get();
+            } else {
+                $id_user = $responses->pluck('user_id')->filter()->unique();
+                $users = User::whereIn('id', $id_user)->get();
+            }
         } else {
             throw new \Exception('No authenticated user found');
         }
+
+        // dd($users);
 
         $file = empty($request->file('file')) ? null : $request->file('file')->store('file');
 
@@ -121,6 +180,12 @@ class CustomerTicketController extends Controller
             'message' => $request->message,
             'file' => $file
         ]);
+
+        $message = "$name membalas keluhan / tiket $ticket->code.";
+        $type = 'comment';
+        $link = route('ticket.show', ['code' => $ticket->code]);
+
+        Notification::send($users, new TicketNotification($message, $type, $link));
 
         return redirect()->route('ticket.show', ['code' => $request->code])->with(['success' => 'Balasan laporan berhasil dibuat.']);
     }

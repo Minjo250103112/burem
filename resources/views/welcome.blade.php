@@ -82,11 +82,11 @@
     </style>
 </head>
 <body class="antialiased">
-  
+
 
     <div class="container">
         <div class="logo">
-            <img src="{{ asset('storage/img/logo.png') }}" alt="Logo Bumitekno">
+            <img src="{{ asset('logo.jpeg') }}" alt="Logo Bumitekno">
         </div>
         <h1>Selamat Datang di<br>Website SICUREM</h1>
         <h3>Sistem Informasi Customer Relationship Management<br>Pengaduan Keluhan Layanan Anda Lebih Efektif dan Efisien</h3>
